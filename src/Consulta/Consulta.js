@@ -1,6 +1,8 @@
 import React from 'react';
 import Banner from "../assets/banner.jpg";
 import {withStyles} from "@material-ui/core/styles";
+import Header from "../Header/Header";
+import Buscador from "./Buscador";
 
 const style = theme => ({
         root: {
@@ -40,7 +42,8 @@ class Consulta extends React.Component{
     render() {
         return (
             <div>
-                hola
+                <Header/>
+                <Buscador/>
             </div>
         )
     }

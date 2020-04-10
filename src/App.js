@@ -4,8 +4,7 @@ import Formulario from "./Formulario/Formulario";
 import {
     BrowserRouter as Router,
     Switch,
-    Route,
-    Link
+    Route
 } from "react-router-dom";
 import Consulta from "./Consulta/Consulta";
 
@@ -53,7 +52,6 @@ function App() {
                   </Route>
               </Switch>
           </Router>
-
       </ThemeProvider>
   );
 }

@@ -3,8 +3,6 @@ import {withStyles} from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Header from "../Header/Header";
-import DateFnsUtils from '@date-io/date-fns';
-import {MuiPickersUtilsProvider} from "@material-ui/pickers";
 import Typography from "@material-ui/core/Typography";
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -46,10 +44,6 @@ const style = theme => ({
 let registroNuevo = {
     fechaCaptura: new Date(),
     ejercicioFiscal: 2020,
-    periodoEjercicio: {
-        fechaInicial: new Date(),
-        fechaFinal: new Date(),
-    },
     ramo: '',
     rfc: "",
     curp: "",
@@ -95,21 +89,6 @@ class Formulario extends React.Component {
                 registro: {
                     ...prevState.registro,
                     [campo]: newVal
-                }
-            }
-        })
-    };
-
-    handleChangeDates = (campo, newVal) => {
-        this.setState(prevState => {
-            return {
-                ...prevState,
-                registro: {
-                    ...prevState.registro,
-                    periodoEjercicio: {
-                        ...prevState.registro.periodoEjercicio,
-                        [campo]: newVal
-                    }
                 }
             }
         })
@@ -241,7 +220,6 @@ class Formulario extends React.Component {
         switch (step) {
             case 0:
                 return <DatosServidor registro={this.state.registro} handleChange={this.handleChangeCampo}
-                                      handleDates={this.handleChangeDates}
                                       handleChangeObject={this.handleChangeObject}/>;
             case 1:
                 return <DatosSuperior superior={this.state.registro.superiorInmedidato}
@@ -316,7 +294,6 @@ class Formulario extends React.Component {
                     </Grid>
                 </Grid>
                 <Paper elevation={3} className={classes.paper}>
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <Stepper activeStep={activeStep}>
                             {steps.map((label, index) => {
                                 const stepProps = {};
@@ -388,7 +365,7 @@ class Formulario extends React.Component {
                                 </Grid>
                             )}
                         </div>
-                    </MuiPickersUtilsProvider>
+
                     <Dialog
                         open={this.state.error}
                         onClose={() => this.handleClose()}

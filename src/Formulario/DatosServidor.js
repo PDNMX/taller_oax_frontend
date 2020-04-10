@@ -2,7 +2,6 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import {withStyles} from "@material-ui/core/styles";
-import {KeyboardDatePicker} from "@material-ui/pickers";
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
@@ -41,13 +40,14 @@ const style = theme => ({
 
 let regRFC = new RegExp('^$|^([A-Z,Ñ,&]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])[A-Z|\\d]{3})$');
 let regCURP = new RegExp('^$|^([A-Z][AEIOUX][A-Z]{2}\\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\\d])(\\d)$')
+
 class DatosServidor extends React.Component {
     render() {
-        const {classes, registro, handleChange, handleDates, handleChangeObject} = this.props;
+        const {classes, registro, handleChange, handleChangeObject} = this.props;
         return (
             <Grid container spacing={4}>
                 <Grid item xs={12} md={4}>
-                    <FormControl className={classes.field} margin={"normal"}>
+                    <FormControl className={classes.field} >
                         <InputLabel id="ejercicioFiscal-label">Ejercicio fiscal</InputLabel>
                         <Select
                             labelId="ejercicioFiscal-label"
@@ -58,99 +58,6 @@ class DatosServidor extends React.Component {
                             <MenuItem value={2018}>2018</MenuItem>
                             <MenuItem value={2019}>2019</MenuItem>
                             <MenuItem value={2020}>2020</MenuItem>
-                        </Select>
-                    </FormControl>
-                </Grid>
-                <Grid item xs={12} md={4}>
-                    <KeyboardDatePicker className={classes.field}
-                                        disableToolbar
-                                        variant="inline"
-                                        format="dd/MM/yyyy"
-                                        margin="normal"
-                                        id="fechaInicial"
-                                        label="Fecha inicial"
-                                        KeyboardButtonProps={{
-                                            'aria-label': 'change date',
-                                        }}
-                                        value={registro.periodoEjercicio.fechaInicial}
-                                        onChange={(e) => handleDates('fechaInicial', e)}
-
-                    />
-                </Grid>
-                <Grid item xs={12} md={4}>
-                    <KeyboardDatePicker className={classes.field}
-                                        disableToolbar
-                                        variant="inline"
-                                        format="dd/MM/yyyy"
-                                        margin="normal"
-                                        id="fechaFinal"
-                                        label="Fecha final"
-                                        KeyboardButtonProps={{
-                                            'aria-label': 'change date',
-                                        }}
-                                        value={registro.periodoEjercicio.fechaFinal}
-                                        onChange={(e) => handleDates('fechaFinal', e)}
-                    />
-                </Grid>
-
-                <Grid item xs={12} md={4}>
-                    <TextField required className={classes.field} id={"nombre"} label={"Nombre"} value={registro.nombres}
-                               onChange={(e) => handleChange('nombres', e)}
-                                error={!registro.nombres || registro.nombres.trim().length === 0}
-                    />
-                </Grid>
-                <Grid item xs={12} md={4}>
-                    <TextField required className={classes.field} id={"apellidoUno"} label={"Apellido paterno"}
-                               value={registro.primerApellido} onChange={(e) => handleChange('primerApellido', e)}
-                               error={!registro.primerApellido || registro.primerApellido.trim().length === 0}/>
-                </Grid>
-                <Grid item xs={12} md={4}>
-                    <TextField className={classes.field} id={"apellidoDos"} label={"Apellido materno"}
-                               value={registro.segundoApellido} onChange={(e) => handleChange('segundoApellido', e)}/>
-                </Grid>
-                <Grid item xs={12} md={4}>
-                    <TextField className={classes.field} id={"rfc"} label={"RFC"} value={registro.rfc}
-                               onChange={(e) => handleChange('rfc', e)}
-                               error={registro.rfc.match(regRFC)== null}
-                    />
-                </Grid>
-                <Grid item xs={12} md={4}>
-                    <TextField className={classes.field} id={"curp"} label={"CURP"} value={registro.curp}
-                               onChange={(e) => handleChange('curp', e)}
-                               error={registro.curp.match(regCURP)== null}
-                    />
-                </Grid>
-                <Grid item xs={12} md={4}>
-                    <FormControl component="fieldset" className={classes.formControl}>
-                        <FormLabel component="legend">Género</FormLabel>
-                        <RadioGroup aria-label="genero" name="genero" row value={registro.genero}>
-                            {generos.map((genero) => (
-                                <FormControlLabel key={genero.clave} control={<Radio/>} label={genero.valor}
-                                                  value={genero} onChange={(e) => {
-                                    handleChangeObject('genero', genero)
-                                }}/>
-                            ))}
-                        </RadioGroup>
-                    </FormControl>
-                </Grid>
-
-
-                <Grid item xs={12} md={4}>
-                    <FormControl required className={classes.field} error={!registro.institucionDependencia}>
-                        <InputLabel id="dependencia-label">Dependencia</InputLabel>
-                        <Select
-                            labelId="dependencia-label"
-                            id="dependencia"
-                            value={registro.institucionDependencia}
-                            onChange={(e) => {
-                                handleChange('institucionDependencia', e)
-                            }}
-                        >
-                            {
-                                dependencias.map((dep) => {
-                                    return <MenuItem key={dep.clave} value={dep}>{dep.nombre}</MenuItem>
-                                })
-                            }
                         </Select>
                     </FormControl>
                 </Grid>
@@ -174,6 +81,53 @@ class DatosServidor extends React.Component {
                     </FormControl>
                 </Grid>
                 <Grid item xs={12} md={4}>
+                    <FormControl required className={classes.field} error={!registro.institucionDependencia} >
+                        <InputLabel id="dependencia-label">Dependencia</InputLabel>
+                        <Select
+                            labelId="dependencia-label"
+                            id="dependencia"
+                            value={registro.institucionDependencia}
+                            onChange={(e) => {
+                                handleChange('institucionDependencia', e)
+                            }}
+                        >
+                            {
+                                dependencias.map((dep) => {
+                                    return <MenuItem key={dep.clave} value={dep}>{dep.nombre}</MenuItem>
+                                })
+                            }
+                        </Select>
+                    </FormControl>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                    <TextField required className={classes.field} id={"nombre"} label={"Nombre"}
+                               value={registro.nombres}
+                               onChange={(e) => handleChange('nombres', e)}
+                               error={!registro.nombres || registro.nombres.trim().length === 0}
+                    />
+                </Grid>
+                <Grid item xs={12} md={4}>
+                    <TextField required className={classes.field} id={"apellidoUno"} label={"Apellido paterno"}
+                               value={registro.primerApellido} onChange={(e) => handleChange('primerApellido', e)}
+                               error={!registro.primerApellido || registro.primerApellido.trim().length === 0}/>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                    <TextField className={classes.field} id={"apellidoDos"} label={"Apellido materno"}
+                               value={registro.segundoApellido} onChange={(e) => handleChange('segundoApellido', e)}/>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                    <TextField className={classes.field} id={"rfc"} label={"RFC"} value={registro.rfc}
+                               onChange={(e) => handleChange('rfc', e)}
+                               error={registro.rfc.match(regRFC) == null}
+                    />
+                </Grid>
+                <Grid item xs={12} md={4}>
+                    <TextField className={classes.field} id={"curp"} label={"CURP"} value={registro.curp}
+                               onChange={(e) => handleChange('curp', e)}
+                               error={registro.curp.match(regCURP) == null}
+                    />
+                </Grid>
+                <Grid item xs={12} md={4}>
                     <FormControl required className={classes.field} error={!registro.puesto}>
                         <InputLabel id="demo-simple-select-label">Puesto</InputLabel>
                         <Select
@@ -190,8 +144,22 @@ class DatosServidor extends React.Component {
                         </Select>
                     </FormControl>
                 </Grid>
+                <Grid item xs={12} >
+                    <FormControl component="fieldset" className={classes.formControl}>
+                        <FormLabel component="legend">Género</FormLabel>
+                        <RadioGroup aria-label="genero" name="genero" row value={registro.genero}>
+                            {generos.map((genero) => (
+                                <FormControlLabel key={genero.clave} control={<Radio/>} label={genero.valor}
+                                                  value={genero} onChange={(e) => {
+                                    handleChangeObject('genero', genero)
+                                }}/>
+                            ))}
+                        </RadioGroup>
+                    </FormControl>
+                </Grid>
                 <Grid item xs={12} md={4}>
-                    <FormControl required component="fieldset" className={classes.formControl} error={registro.tipoProcedimiento.length===0}>
+                    <FormControl required component="fieldset" className={classes.formControl}
+                                 error={registro.tipoProcedimiento.length === 0}>
                         <FormLabel component="legend">Tipo procedimiento</FormLabel>
                         <FormGroup onChange={(e) => handleChangeObject('tipoProcedimiento', e)}>
                             {
@@ -206,7 +174,8 @@ class DatosServidor extends React.Component {
                                 })
                             }
                         </FormGroup>
-                        <FormHelperText>Selecciona los tipos de procedimientos en los que puede participar el SP</FormHelperText>
+                        <FormHelperText>Selecciona los tipos de procedimientos en los que puede participar el
+                            SP</FormHelperText>
                     </FormControl>
                 </Grid>
 
