@@ -59,136 +59,113 @@ const styles = theme => ({
 class DetalleServidor extends React.Component {
     render() {
         const {classes, handleChangeDetail, servidor} = this.props;
-console.log(servidor)
         return (
-            <div>
-                <Grid container spacing={0} className={classes.infoBusqueda}>
-                    <Grid item xs={12} className={classes.container}>
-                        <Paper className={classes.paper} elevation={3}>
-                            <Grid container spacing={2}>
-                                <Grid item xs={12}>
-                                    <Typography style={{textAlign: "right"}}>
+            <Grid container spacing={0} className={classes.infoBusqueda}>
+                <Grid item xs={12} className={classes.container}>
+                    <Paper className={classes.paper} elevation={3}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                                <Typography style={{textAlign: "right"}}>
                                 <span className={classes.cuadroActualizacion}>
                                   Actualización:{" "}{servidor.fechaCaptura}
                                 </span>
-                                    </Typography>
-                                </Grid>
-
-                                <Grid item xs={12} md={6}>
-                                    <Typography variant={"h6"}>
-                                        {servidor.nombres}{" "}{servidor.primerApellido}{" "}{servidor.segundoApellido}
-                                    </Typography>
-                                    <Typography className={classes.dataCard}>
-                                        {servidor.puesto.nombre}
-                                    </Typography>
-                                </Grid>
-                                <Grid item xs={12} md={6}>
-                                    <Typography className={classes.tituloCard}>
-                                        Dependencia
-                                    </Typography>
-                                    <Typography className={classes.dataCard}>
-                                        {servidor.institucionDependencia.nombre}{servidor.institucionDependencia.siglas ? '('+servidor.institucionDependencia.siglas+')': '' }
-                                    </Typography>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <Divider className={classes.divider} variant={"middle"}/>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <Typography className={classes.titulo} align={"center"}>
-                                        Información del servidor y su participación
-                                    </Typography>
-                                </Grid>
-
-                                <Grid item xs={12} md={4}>
-                                    <Typography className={classes.tituloCard}>
-                                        Ejercicio fiscal
-                                    </Typography>
-                                    <Typography className={classes.dataCard}>
-                                        {servidor.ejercicioFiscal}
-                                    </Typography>
-                                </Grid>
-                                <Grid item xs={12} md={4}>
-                                    <Typography className={classes.tituloCard}>
-                                        Ramo
-                                    </Typography>
-                                    <Typography className={classes.dataCard}>
-                                        {servidor.ramo.valor}
-                                    </Typography>
-                                </Grid>
-                                <Grid item xs={12} md={4}>
-                                    <Typography className={classes.tituloCard}>
-                                        Tipo procedimiento
-                                    </Typography>
-                                    <Typography className={classes.dataCard}>
-                                        {servidor.tipoProcedimiento.map(element=> element.valor).join(', ')}
-                                    </Typography>
-                                </Grid>
-                                <Grid item xs={12} md={4}>
-                                    <Typography className={classes.tituloCard}>
-                                        Tipo área
-                                    </Typography>
-                                    <Typography className={classes.dataCard}>
-                                        {servidor.tipoArea.map(element=> element.valor).join(', ')}
-                                    </Typography>
-                                </Grid>
-                                <Grid item xs={12} md={4}>
-                                    <Typography className={classes.tituloCard}>
-                                       Nivel Responsabilidad
-                                    </Typography>
-                                    <Typography className={classes.dataCard}>
-                                        {servidor.nivelResponsabilidad.map(element=> element.valor).join(', ')}
-                                    </Typography>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <Typography className={classes.titulo} align={"center"}>
-                                        Información del superior
-                                    </Typography>
-                                </Grid>
-
-                                <Grid item xs={12} md={4}>
-                                    <Typography className={classes.tituloCard}>
-                                        Nombre
-                                    </Typography>
-                                    <Typography className={classes.dataCard}>
-                                        {servidor.superiorInmediato.nombres}
-                                    </Typography>
-                                </Grid>
-                                <Grid item xs={12} md={4}>
-                                    <Typography className={classes.tituloCard}>
-                                        Primer apellido
-                                    </Typography>
-                                    <Typography className={classes.dataCard}>
-                                        {servidor.superiorInmediato.primerApellido}
-                                    </Typography>
-                                </Grid>
-                                <Grid item xs={12} md={4}>
-                                    <Typography className={classes.tituloCard}>
-                                        Segundo apellido
-                                    </Typography>
-                                    <Typography className={classes.dataCard}>
-                                        {servidor.superiorInmediato.segundoApellido}
-                                    </Typography>
-                                </Grid>
-                                <Grid item xs={12} md={4}>
-                                    <Typography className={classes.tituloCard}>
-                                        Puesto
-                                    </Typography>
-                                    <Typography className={classes.dataCard}>
-                                        {servidor.superiorInmediato.puesto.nombre}
-                                    </Typography>
-                                </Grid>
-
-                                <Grid item xs={12} style={{textAlign: 'right'}}>
-                                    <Button className={classes.btnBack} onClick={() => handleChangeDetail()}
-                                            startIcon={<ArrowBackIosIcon/>}
-                                    >Regresar</Button>
-                                </Grid>
+                                </Typography>
                             </Grid>
-                        </Paper>
-                    </Grid>
-                </Grid>
+                            <Grid item xs={12} md={6}>
+                                <Typography variant={"h6"}>
+                                    {servidor.nombres}{" "}{servidor.primerApellido}{" "}{servidor.segundoApellido}
+                                </Typography>
+                                <Typography className={classes.dataCard}>
+                                    {servidor.puesto.nombre}
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={12} md={6}>
+                                <Typography className={classes.tituloCard}>
+                                    Dependencia
+                                </Typography>
+                                <Typography className={classes.dataCard}>
+                                    {servidor.institucionDependencia.nombre}{servidor.institucionDependencia.siglas ? '(' + servidor.institucionDependencia.siglas + ')' : ''}
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Divider className={classes.divider} variant={"middle"}/>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Typography className={classes.titulo} align={"center"}>
+                                    Información del servidor y su participación
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={12} md={4}>
+                                <Typography className={classes.tituloCard}>
+                                    Ejercicio fiscal
+                                </Typography>
+                                <Typography className={classes.dataCard}>
+                                    {servidor.ejercicioFiscal}
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={12} md={4}>
+                                <Typography className={classes.tituloCard}>
+                                    Ramo
+                                </Typography>
+                                <Typography className={classes.dataCard}>
+                                    {servidor.ramo.valor}
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={12} md={4}>
+                                <Typography className={classes.tituloCard}>
+                                    Tipo procedimiento
+                                </Typography>
+                                <Typography className={classes.dataCard}>
+                                    {servidor.tipoProcedimiento.map(element => element.valor).join(', ')}
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={12} md={4}>
+                                <Typography className={classes.tituloCard}>
+                                    Tipo área
+                                </Typography>
+                                <Typography className={classes.dataCard}>
+                                    {servidor.tipoArea.map(element => element.valor).join(', ')}
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={12} md={4}>
+                                <Typography className={classes.tituloCard}>
+                                    Nivel Responsabilidad
+                                </Typography>
+                                <Typography className={classes.dataCard}>
+                                    {servidor.nivelResponsabilidad.map(element => element.valor).join(', ')}
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Typography className={classes.titulo} align={"center"}>
+                                    Información del superior
+                                </Typography>
+                            </Grid>
 
-            </div>
+                            <Grid item xs={12} md={4}>
+                                <Typography className={classes.tituloCard}>
+                                    Nombre
+                                </Typography>
+                                <Typography className={classes.dataCard}>
+                                    {servidor.superiorInmediato.nombres}{" "}{servidor.superiorInmediato.primerApellido}{" "}{servidor.superiorInmediato.segundoApellido}
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={12} md={4}>
+                                <Typography className={classes.tituloCard}>
+                                    Puesto
+                                </Typography>
+                                <Typography className={classes.dataCard}>
+                                    {servidor.superiorInmediato.puesto.nombre}
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={12} style={{textAlign: 'right'}}>
+                                <Button className={classes.btnBack} onClick={() => handleChangeDetail()}
+                                        startIcon={<ArrowBackIosIcon/>}
+                                >Regresar</Button>
+                            </Grid>
+                        </Grid>
+                    </Paper>
+                </Grid>
+            </Grid>
         )
     }
 

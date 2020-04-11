@@ -137,7 +137,7 @@ class Buscador extends React.Component {
         if (rfc) filtros.rfc = rfc;
         if (curp) filtros.curp = curp;
         if (institucionDependencia && institucionDependencia !== '') filtros.institucionDependencia = institucionDependencia;
-        if (tipoProcedimiento.length > 0) filtros.tipoProcedimiento = tipoProcedimiento.map(item => item.value);
+        if (tipoProcedimiento.length > 0) filtros.tipoProcedimiento = tipoProcedimiento.map(item => item.clave);
         return filtros;
     };
     makeSort = () => {
@@ -158,7 +158,6 @@ class Buscador extends React.Component {
             axios.post(process.env.REACT_APP_API, body)
                 .then(res => {
                     let data = res.data;
-                    console.log(res)
                     this.setState({
                         filterData: data.results,
                         loading: false,
@@ -171,6 +170,17 @@ class Buscador extends React.Component {
         });
     };
 
+    handleChangePage = (event, page) => {
+        this.setState({page:page+1}, () => {
+            this.buscar();
+        });
+    };
+
+    handleChangeRowsPerPage = event => {
+        this.setState({rowsPerPage: event.target.value, page: 1}, () => {
+            this.buscar();
+        });
+    };
     verDetalle = (event, elemento) => {
         this.setState({elementoSeleccionado: elemento});
     };
