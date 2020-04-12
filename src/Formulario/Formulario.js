@@ -56,7 +56,7 @@ let registroNuevo = {
     tipoArea: [],
     nivelResponsabilidad: [],
     tipoProcedimiento: [],
-    superiorInmedidato: {
+    superiorInmediato: {
         nombres: "",
         primerApellido: "",
         segundoApellido: "",
@@ -124,8 +124,8 @@ class Formulario extends React.Component {
                 ...prevState,
                 registro: {
                     ...prevState.registro,
-                    superiorInmedidato: {
-                        ...prevState.registro.superiorInmedidato,
+                    superiorInmediato: {
+                        ...prevState.registro.superiorInmediato,
                         [campo]: newVal
                     }
                 }
@@ -196,10 +196,32 @@ class Formulario extends React.Component {
             valido = false;
         return valido;
     }
+
+    limpiaRegistro=(obj) =>{
+        let objeto = obj? obj : this.state.registro;
+        let propiedades = Object.keys(objeto);
+        let objetoLimpio = {};
+
+        for(let c = 0; c<= propiedades.length;c++){
+            let propiedad = propiedades[c];
+            if(objeto[propiedad]){
+                if(propiedad === 'superiorInmediato'){
+                    let si = this.limpiaRegistro(objeto[propiedad])
+                    if(Object.keys(si).length>0)
+                        objetoLimpio[propiedad] = si;
+                }
+                else if(Array.isArray(objeto[propiedad]) && objeto[propiedad].length>0)
+                    objetoLimpio[propiedad] = objeto[propiedad]
+                else if(!Array.isArray(objeto[propiedad]))
+                    objetoLimpio[propiedad] = objeto[propiedad]
+            }
+        }
+        return objetoLimpio
+    }
     handleSave = () => {
         if (this.isValido()) {
             axios.post(process.env.REACT_APP_API+'create',
-                this.state.registro
+                this.limpiaRegistro()
             ).then(response => {
                 this.handleNext();
             }).catch(error => {
@@ -222,7 +244,7 @@ class Formulario extends React.Component {
                 return <DatosServidor registro={this.state.registro} handleChange={this.handleChangeCampo}
                                       handleChangeObject={this.handleChangeObject}/>;
             case 1:
-                return <DatosSuperior superior={this.state.registro.superiorInmedidato}
+                return <DatosSuperior superior={this.state.registro.superiorInmediato}
                                       handleChange={this.handleChangeSuperior}/>;
             case 2:
                 return 'Pulsa el botón Guardar para salvar el registro.';
