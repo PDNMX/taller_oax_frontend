@@ -220,8 +220,9 @@ class Formulario extends React.Component {
     }
     handleSave = () => {
         if (this.isValido()) {
+            let registro = this.limpiaRegistro()
             axios.post(process.env.REACT_APP_API+'create',
-                this.limpiaRegistro()
+                registro
             ).then(response => {
                 this.handleNext();
             }).catch(error => {

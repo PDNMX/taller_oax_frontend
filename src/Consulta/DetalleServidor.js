@@ -108,7 +108,7 @@ class DetalleServidor extends React.Component {
                                     Ramo
                                 </Typography>
                                 <Typography className={classes.dataCard}>
-                                    {servidor.ramo.valor}
+                                    {servidor.ramo? servidor.ramo.valor:'Dato no proporcionado'}
                                 </Typography>
                             </Grid>
                             <Grid item xs={12} md={4}>
@@ -116,7 +116,7 @@ class DetalleServidor extends React.Component {
                                     Tipo procedimiento
                                 </Typography>
                                 <Typography className={classes.dataCard}>
-                                    {servidor.tipoProcedimiento.map(element => element.valor).join(', ')}
+                                    {servidor.tipoProcedimiento? servidor.tipoProcedimiento.map(element => element.valor).join(', '):"Dato no proporcionado"}
                                 </Typography>
                             </Grid>
                             <Grid item xs={12} md={4}>
@@ -124,7 +124,7 @@ class DetalleServidor extends React.Component {
                                     Tipo área
                                 </Typography>
                                 <Typography className={classes.dataCard}>
-                                    {servidor.tipoArea.map(element => element.valor).join(', ')}
+                                    {servidor.tipoArea? servidor.tipoArea.map(element => element.valor).join(', '):"Dato no proporcionado"}
                                 </Typography>
                             </Grid>
                             <Grid item xs={12} md={4}>
@@ -132,7 +132,7 @@ class DetalleServidor extends React.Component {
                                     Nivel Responsabilidad
                                 </Typography>
                                 <Typography className={classes.dataCard}>
-                                    {servidor.nivelResponsabilidad.map(element => element.valor).join(', ')}
+                                    {servidor.nivelResponsabilidad ? servidor.nivelResponsabilidad.map(element => element.valor).join(', '):"Dato no proporcionado"}
                                 </Typography>
                             </Grid>
                             <Grid item xs={12}>
@@ -146,7 +146,7 @@ class DetalleServidor extends React.Component {
                                     Nombre
                                 </Typography>
                                 <Typography className={classes.dataCard}>
-                                    {servidor.superiorInmediato.nombres}{" "}{servidor.superiorInmediato.primerApellido}{" "}{servidor.superiorInmediato.segundoApellido}
+                                    {servidor.superiorInmediato?servidor.superiorInmediato.nombres+" "+(servidor.superiorInmediato.primerApellido?servidor.superiorInmediato.primerApellido:'')+" "+(servidor.superiorInmediato.segundoApellido?servidor.superiorInmediato.segundoApellido:''):"Dato no proporcionado"}
                                 </Typography>
                             </Grid>
                             <Grid item xs={12} md={4}>
@@ -154,7 +154,7 @@ class DetalleServidor extends React.Component {
                                     Puesto
                                 </Typography>
                                 <Typography className={classes.dataCard}>
-                                    {servidor.superiorInmediato.puesto.nombre}
+                                    {servidor.superiorInmediato && servidor.superiorInmediato.puesto ? servidor.superiorInmediato.puesto.nombre: "Dato no proporcionado"}
                                 </Typography>
                             </Grid>
                             <Grid item xs={12} style={{textAlign: 'right'}}>
