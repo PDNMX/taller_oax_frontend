@@ -161,7 +161,7 @@ class DatosServidor extends React.Component {
                     <FormControl required component="fieldset" className={classes.formControl}
                                  error={registro.tipoProcedimiento.length === 0}>
                         <FormLabel component="legend">Tipo procedimiento</FormLabel>
-                        <FormGroup onChange={(e) => handleChangeObject('tipoProcedimiento', e)}>
+                        <FormGroup>
                             {
                                 tiposProcedimiento.map(tp => {
                                     return (<FormControlLabel key={tp.clave}

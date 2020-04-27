@@ -262,11 +262,11 @@ class Formulario extends React.Component {
 
     render() {
         const {classes} = this.props;
-        let {activeStep, steps} = this.state;
+        const {activeStep, steps} = this.state;
         return (
             <div>
                 <Header/>
-                <Grid container className={classes.root}>
+                <Grid container className={this.props.classes.root}>
                     <Grid item xs={12}>
                         <Typography variant={"h6"} paragraph color={"primary"} align={"center"}>
                             <b>Formulario de captura</b>
@@ -318,7 +318,7 @@ class Formulario extends React.Component {
                 </Grid>
                 <Paper elevation={3} className={classes.paper}>
                         <Stepper activeStep={activeStep}>
-                            {steps.map((label, index) => {
+                            {this.state.steps.map((label, index) => {
                                 const stepProps = {};
                                 const labelProps = {};
                                 if (this.isStepOptional(index)) {
